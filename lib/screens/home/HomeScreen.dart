@@ -19,10 +19,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screenList = [
-    Dashboard(),
-    WatchScreen(),
-    Scaffold(),
-    Scaffold()
+    const Dashboard(),
+    const WatchScreen(),
+    const Scaffold(),
+    const Scaffold()
   ];
   @override
   Widget build(BuildContext context) {
@@ -30,73 +30,74 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
-          bottomNavigationBar: SizedBox(
-            height: 75.sp,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
-              child: BottomNavigationBar(
-                backgroundColor: colorGunMetal,
-                selectedItemColor: Colors.white,
-                selectedLabelStyle: kBottomBarItemStyle,
-                type: BottomNavigationBarType.fixed,
-                unselectedItemColor: colorBottomBarItem,
-                currentIndex: homeBloc.currentIndex,
-                onTap: (index) {
-                  homeBloc.add(BottomBarTapEvent(index));
-                },
-                items: [
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(
-                        icDashboard,
-                        width: 18,
-                        height: 18,
-                        colorFilter: ColorFilter.mode(
-                            homeBloc.currentIndex == 0
-                                ? Colors.white
-                                : colorBottomBarItem,
-                            BlendMode.srcIn),
-                      ),
-                      label: 'Dashboard'),
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(icWatch,
-                          width: 18,
-                          height: 18,
-                          colorFilter: ColorFilter.mode(
-                              homeBloc.currentIndex == 1
-                                  ? Colors.white
-                                  : colorBottomBarItem,
-                              BlendMode.srcIn)),
-                      label: 'Watch'),
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(icMediaLibrary,
-                          width: 18,
-                          height: 18,
-                          colorFilter: ColorFilter.mode(
-                              homeBloc.currentIndex == 2
-                                  ? Colors.white
-                                  : colorBottomBarItem,
-                              BlendMode.srcIn)),
-                      label: 'Media Library'),
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(icMore,
-                          width: 18,
-                          height: 18,
-                          colorFilter: ColorFilter.mode(
-                              homeBloc.currentIndex == 3
-                                  ? Colors.white
-                                  : colorBottomBarItem,
-                              BlendMode.srcIn)),
-                      label: 'More'),
-                ],
-              ),
-            ),
-          ),
+          bottomNavigationBar: bottomBar(homeBloc),
           body: screenList[homeBloc.currentIndex],
         );
       },
+    );
+  }
+
+  Widget bottomBar(HomeBloc homeBloc) {
+    return Container(
+      height: 77.sp,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: colorGunMetal,
+          selectedItemColor: Colors.white,
+          selectedLabelStyle: kBottomBarItemStyle,
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: colorBottomBarItem,
+          currentIndex: homeBloc.currentIndex,
+          onTap: (index) {
+            homeBloc.add(BottomBarTapEvent(index));
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 4),
+                  child: SvgPicture.asset(
+                    icDashboard,
+                    colorFilter: ColorFilter.mode(
+                        homeBloc.currentIndex == 0
+                            ? Colors.white
+                            : colorBottomBarItem,
+                        BlendMode.srcIn),
+                  ),
+                ),
+                label: 'Dashboard'),
+            BottomNavigationBarItem(
+                icon: Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 4),
+                  child: SvgPicture.asset(icWatch,
+                      colorFilter: ColorFilter.mode(
+                          homeBloc.currentIndex == 1
+                              ? Colors.white
+                              : colorBottomBarItem,
+                          BlendMode.srcIn)),
+                ),
+                label: 'Watch'),
+            BottomNavigationBarItem(
+                icon: Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 4),
+                  child: SvgPicture.asset(icMediaLibrary,
+                      colorFilter: ColorFilter.mode(
+                          homeBloc.currentIndex == 2
+                              ? Colors.white
+                              : colorBottomBarItem,
+                          BlendMode.srcIn)),
+                ),
+                label: 'Media Library'),
+            BottomNavigationBarItem(
+                icon: Container(
+                    margin: EdgeInsets.only(top: 10), child: Icon(Icons.menu)),
+                label: 'More'),
+          ],
+        ),
+      ),
     );
   }
 }

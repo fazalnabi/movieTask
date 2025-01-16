@@ -5,10 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:tentwentytask/config/AppColors.dart';
 
 var kBottomBarItemStyle = GoogleFonts.roboto().copyWith(
-    fontSize: 10.sp,
-    color: colorBottomBarItem,
-    fontWeight: FontWeight.w700,
-    height: 2);
+    fontSize: 10.sp, color: colorBottomBarItem, fontWeight: FontWeight.w700);
 
 var kHeadingStyle = GoogleFonts.poppins().copyWith(
     fontSize: 12.sp, color: colorGunMetal, fontWeight: FontWeight.w500);

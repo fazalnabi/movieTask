@@ -50,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Expanded(
                   child: BlocBuilder<SearchBloc, SearchState>(
                     builder: (context, state) {
+                      print(state);
                       if (state is SearchInitial) {
                         return gridView(searchBloc.allMovies);
                       } else if (state is SearchLoaded) {
@@ -116,7 +117,6 @@ class _SearchScreenState extends State<SearchScreen> {
               controller.closeView('');
             } else {
               controller.text = '';
-              context.read<SearchBloc>().add(SearchQueryChanged(''));
             }
           },
           child: const Icon(Icons.close),
