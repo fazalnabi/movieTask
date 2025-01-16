@@ -16,7 +16,7 @@ class SeatWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100.sp,
+      width: 120.sp,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
